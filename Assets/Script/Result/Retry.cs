@@ -11,8 +11,6 @@ public class ResultUI : MonoBehaviour
     void Start()
     {
        
-
-        // ボタンに処理を登録
         retryButton.onClick.AddListener(OnRetry);
        
     }

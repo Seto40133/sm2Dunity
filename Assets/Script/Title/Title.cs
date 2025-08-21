@@ -5,7 +5,7 @@ public class TitleManager : MonoBehaviour
 {
     public void OnStartButton()
     {
-        SceneManager.LoadScene("GameScene"); // ← メインゲームシーン名に変更
+        SceneManager.LoadScene("GameScene");
     }
 
    

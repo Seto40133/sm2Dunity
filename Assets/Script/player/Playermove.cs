@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Playermove : MonoBehaviour
@@ -18,13 +19,15 @@ public class Playermove : MonoBehaviour
 
     private bool isGrounded;
 
-    // Start is called before the first frame update
+    [SerializeField] private int maxHealth = 3;
+    private int currentHealth;
+
     void Start()
     {
         rd = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float move = Input.GetAxisRaw("Horizontal");
@@ -43,8 +46,6 @@ public class Playermove : MonoBehaviour
             rd.velocity = new Vector2(rd.velocity.x, jumpSpeed);
         }
 
-
-
     }
     void OnDrawGizmosSelected()
     {
@@ -54,6 +55,33 @@ public class Playermove : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
         }
     }
+     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(1);
+        }
+    }
+
+    private void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log("ダメージ残りHP: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("ゲームオーバー！");
+
+         SceneManager.LoadScene("ResultScene");
+        
+    }
+    
 }
 
 
