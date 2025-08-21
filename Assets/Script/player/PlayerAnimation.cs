@@ -22,8 +22,6 @@ public class PlayerAnimation : MonoBehaviour
 
         animator.SetBool("IsJumping", isJumping);
         
-        bool isfall = Mathf.Abs(rb.velocity.y) > -1f;
-
-        animator.SetBool("Isfall", isfall);
+        
     }
 }
